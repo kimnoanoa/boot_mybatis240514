@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<th:block th:replace="~{layout :: setFragment(~{this::content})}">
+    <th:block th:fragment="content" th:with="auth=${#authentication.getPrincipal()}">
+        <h1>Member Modify page</h1>
+    <form action="/member/modify" method="post" >
+        <div class="mb-3">
+            <label for="email" class="form-label">이메일</label>
+            <input type="text" class="form-control" id="email" placeholder="${mvo.email }" name="email"  th:value="${auth.mvo.email }" readonly="readonly">
+        </div>
+        <div class="mb-3">
+            <label for="pwd" class="form-label">비밀번호</label>
+            <input type="password" class="form-control" id="pwd" placeholder="보안처리된 비밀번호"  name="pwd" >
+        </div>
+        <div class="mb-3">
+            <label for="nickName" class="form-label">닉네임</label>
+            <input type="text" class="form-control" id="nickName" placeholder="닉네임 입력..."  name="nickName" th:value="${auth.mvo.nickName }">
+        </div>
+        <div class="mb-3">
+            <label for="regAt" class="form-label">가입일</label>
+            <input type="text" class="form-control" id="regAt" placeholder="${mvo.regAt }" name="regAt"  th:value="${auth.mvo.regAt }" readonly="readonly">
+        </div>
+        <div class="mb-3">
+            <label for="lastLogin" class="form-label">마지막 접속일</label>
+            <input type="text" class="form-control" id="lastLogin" placeholder="${mvo.lastLogin }" name="lastLogin"  th:value="${auth.mvo.lastLogin }" readonly="readonly">
+        </div>
+
+
+        <button type="submit" class="btn btn-primary">수정</button>
+        <a href="/member/delete"> <button type="button" class="btn btn-danger" onclick="removePopup()">회원탈퇴</button> </a>
+    </form>
+        </sec:authorize>
+
+        </div>
+
+    </form>
+
+    </th:block>
+</th:block>
+
+<script type="text/javascript">
+
+    function removePopup() {
+
+       if(confirm("정말 회원탈퇴를 하시겠습니까?")){
+
+       }else{
+          event.preventDefault();
+       }
+
+    }
+
+</script>
